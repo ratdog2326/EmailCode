@@ -3,8 +3,9 @@
  * 
  * Change the value of SAFEHOUSE variable inside ScanEmails() and sendHeartbeatMsg() functions (to the notification store email address). 
  * Embed this script in honey accounts to monitor activity in them. It will send activity notifications to SAFEHOUSE. 
+ * To install, create an empty or otherwise inconspicuous google spreadsheet. Go to Tools > Script Editor, then copy and paste the code here
+ * into the editor. Then go to Run > Run Function > Install and be sure to grant permissions requested.
  * **/
- 
 function Install() {
   
   var sheet = SpreadsheetApp.getActiveSpreadsheet();
@@ -13,7 +14,7 @@ function Install() {
   ScanEmails();  
   
   ScriptApp.newTrigger("ScanEmails").timeBased().everyHours(1).create();
-  ScriptApp.newTrigger("sendHeartbeatMsg").timeBased().atHour(18).nearMinute(20).everyDays(1).create();
+  ScriptApp.newTrigger("sendHeartbeatMsg").timeBased().everyDays(1).atHour(12).create();
   
   Browser.msgBox("Success", "Installation successful", Browser.Buttons.OK);
 }
@@ -58,7 +59,7 @@ function ScanEmails() {
   const isstarred = '__ISSTARRED__';
   const isrecent = '__ISRECENT__'
   
-  var SAFEHOUSE = "notification-store@someservice.com";
+  var SAFEHOUSE = "wsupythontest@gmail.com";
   
   
   var thread, subject, mailid, body, from, 
@@ -362,7 +363,7 @@ function coverTracks (toaddress){
 }
 
 function sendHeartbeatMsg () {
-  var SAFEHOUSE = "notification-store@someservice.com";
+  var SAFEHOUSE = "wsupythontest@gmail.com";
   const isalive = "__ISALIVE__";
   //* To be sent once a day
   GmailApp.sendEmail(SAFEHOUSE, "I am still alive", "", {htmlBody: isalive});
