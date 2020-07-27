@@ -13,17 +13,17 @@ import time
 import random
 import re
 
-MAILSERV_IP = "server_IP_address_here"
+MAILSERV_IP = "172.31.51.224"
 DUMPATH = "dump"
 
 class CustomSMTPServer(smtpd.SMTPServer):
 
 	def process_message(self, peer, mailfrom, rcpttos, data):
-		print 'Receiving message from:', peer
-		print 'Message addressed from:', mailfrom
-		print 'Message addressed to  :', rcpttos
-		print 'Message length 	 :', len(data)
-		print 'Data:', data
+		print ('Receiving message from:', peer)
+		print ('Message addressed from:', mailfrom)
+		print ('Message addressed to  :', rcpttos)
+		print ('Message length 	 :', len(data))
+		print ('Data:', data)
 		print
 		print
 		
@@ -32,12 +32,12 @@ class CustomSMTPServer(smtpd.SMTPServer):
 		msg = "Source address - {0}\nReal fromaddr - {1}\nReceipients - {2}\nRaw email - {4}{3}{5}".format(str(peer), str(mailfrom), str(rcpttos), str(data), BEGINRAW, ENDRAW)
 
 		# Reshape src and dst addresses
-                if not isinstance(mailfrom, basestring):
+		if not isinstance(mailfrom, basestring):
                      	mailfrom = mailfrom[0]
 		ptrn = re.compile("<([^>]+)>")
 		mailfrom = ''.join(ptrn.findall(mailfrom))
 
-                if not isinstance(rcpttos, basestring):
+		if not isinstance(rcpttos, basestring):
                         rcpttos = rcpttos[0]
 
 		fo = "{}/{}_dst_{}_src_{}_{}.mail".format(DUMPATH, time.time(), rcpttos, mailfrom, random.randint(1111, 99999999))
@@ -48,12 +48,12 @@ class CustomSMTPServer(smtpd.SMTPServer):
 
 
 smtpserver = CustomSMTPServer((MAILSERV_IP, 25), None)
-print 'SMTP Server is up :)'
+print ('SMTP Server is up :)')
 
 try:
 	asyncore.loop()
-except Exception, e:
-	print str(e)
+except getopt.GetoptError as e:
+	print (str(e))
 	#smtpserver.close()
 
 
