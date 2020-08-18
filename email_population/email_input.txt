@@ -1,0 +1,3 @@
+0
+Please refer to email_input template for filling this file out. Before use, delete this line and adjust the above int to the number of emails you wish to send.
+0

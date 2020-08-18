@@ -1,0 +1,16 @@
+email input must be limited to 5 lines per email and adhere to the following template:
+
+# of emails stored in file (KEEP TRACK OF!!!)
+Sender email address
+Sender password
+Recipient email address
+Subject
+Body
+(Empty Space)
+Sender email address of next email message
+.
+.
+.
+Subject of final email
+Body of final email
+0 (this is the last line of the file and must be an int of some sort)
